@@ -18,7 +18,7 @@ class PatientFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->firstName(),
+            'name' => fake()->name(),
             'status' => 'null',
             'fingerprint_no' => null ,
         ];

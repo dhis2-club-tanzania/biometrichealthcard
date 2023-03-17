@@ -36,7 +36,7 @@
                     </a>
                         <button class="bg-gray-700 px-4 py-2 rounded-md text-gray-50 font-semibold tracking-wide cursor-pointer" type="button" data-toggle="modal" data-target="#registerModal">Register Fingerprint</button>
                         <form method="post" action="#">
-                        <div class="modal fade" id="registerModal" tabindex="-1" role="dialog">
+                        <div class="modal fade" id="registerModal" tabindex="-1" role="dialog"  aria-hidden="true" data-backdrop="static">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -47,6 +47,8 @@
                                             </button>
                                     </div>
                                     {{-- modal body --}}
+                                    <form>
+                                        @csrf
                                     <div class="modal-body">
                                         <div class="row">
                                             <div class="form-group col-md-8">
@@ -59,21 +61,21 @@
                                             </div>
                                             </div>
                                           </div>
+                                          {{-- <input type="text" onchange="showResult(this)"> --}}
                                           <div class="row">
                                               <div class="form-group col-md-8">
                                                 <label for="Club">Fingerprint ID:</label>
-                                                <input type="text" class="form-control" name="generated-ids" id="query2">
+                                                <div>
+                                                <input type="text" name="fingerprint_no" id="fingerprint_no" readonly>
+                                                </div>
                                               </div>
                                           </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <form action="/api/newfingerprint" method="POST">
-                                            @csrf
-                                            <button type="submit" class="btn btn-success">Generate ID</button>
-                                        </form>
-                                            <button type="button" id="savedb" class="btn btn-primary">Save
-                                            changes</button>
+                                            <button type="submit" class="btn btn-success" onclick="generateRandomNumber()">Generate ID</button>
+                                            <button type="button" id="savedb" class="btn btn-primary">Save Changes</button>
                                     </div>
+                                </form>
                                     {{-- moddle end --}}
                                 </div>
                             </div>
@@ -220,9 +222,9 @@
             });
             $('#savedb').on('click', function () {
                  var value = $('#search-input').val();
-                 var value2 = $('#query2').val();
+                 var value2 = $('#fingerprint_no').val();
                 console.log(value2);
-                 $.ajax({
+                $.ajax({
                   url: "{{ url('/saving') }}",
                   type: "POST",
                   data: {
@@ -234,12 +236,40 @@
 
                     console.log(response);
                   }
+                })
 
+                $.ajax({
+                  url: "{{ url('/api/registerfingerprint') }}",
+                  type: "POST",
+                  data: {
+                    "_token": "{{ csrf_token() }}",
+                    "query1": value,
+                    "query2" : value2,
+                  },
+                  success: function(response) {
 
-                 })
+                    console.log(response);
+                  }
+                })
 
     });
           </script>
+          <script>
+            function generateRandomNumber() {
+                event.preventDefault();
+                fetch('{{ route("generateFingerprintId") }}', {
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('fingerprint_no').value = data.fingerprint_no;
+                        console.log('me');
+                    })
+                    .catch(error => console.error(error));
+            }
+            </script>
                       <div class="mt-4 p-4">
                           {{$patients->links()}}
                       </div>

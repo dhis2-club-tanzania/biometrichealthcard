@@ -45,4 +45,6 @@ Route::post('/search', [PatientController::class, 'search'])->name('search');
 
 Route::post('/saving', [PatientController::class, 'savetodatabase'])->name('savetodatabase');
 
+Route::get('/generateFingerprintId', [PatientController::class, 'generateFingerprintId'])->name('generateFingerprintId');
+
 require __DIR__.'/auth.php';

@@ -10,23 +10,23 @@ use Illuminate\Support\Facades\Validator;
 class ClientController extends Controller
 {
 
-            public function generateIds()
-            {
-                // Get the last generated ID from the clients table
-                $lastId = DB::table('clients')->max('fingerprint_no');
+            // public function generateIds()
+            // {
+            //     // Get the last generated ID from the clients table
+            //     $lastId = DB::table('clients')->max('fingerprint_no');
 
-                // Generate the next ID sequentially between 1 and 127
-                $nextId = $lastId % 127 + 1;
+            //     // Generate the next ID sequentially between 1 and 127
+            //     $nextId = $lastId % 127 + 1;
 
-                if (!$nextId) {
-                    // Return an error response if there are no available IDs
-                    return response()->json(['error' => 'No available IDs'], 400);
-                }
+            //     if (!$nextId) {
+            //         // Return an error response if there are no available IDs
+            //         return response()->json(['error' => 'No available IDs'], 400);
+            //     }
 
-                // Send the next ID back to your IoT device
-                $data = ['fingerprint_no' => $nextId];
-                return response()->json($data);
-            }
+            //     // Send the next ID back to your IoT device
+            //     $data = ['fingerprint_no' => $nextId];
+            //     return response()->json($data);
+            // }
 
             public function saving(Request $request)
             {

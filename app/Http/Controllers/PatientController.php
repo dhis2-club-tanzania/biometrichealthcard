@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class PatientController extends Controller
 {
-    public function RegisterNewFingerprint()
+    public function RegisterFingerprint()
     {
         // $usedIds = DB::table('patients')->pluck('fingerprint_no')->toArray();
         // $availableIds = array_diff(range(1, 127), $usedIds);
@@ -63,6 +63,15 @@ class PatientController extends Controller
                 return response()->json($patientlist);
             }
 
+            public function generateFingerprintId()
+            {
+                $usedIds = DB::table('patients')->pluck('fingerprint_no')->toArray();
+                $availableIds = array_diff(range(1, 127), $usedIds);
+                $fingerprint_no = min($availableIds);
+                return response()->json(['fingerprint_no' => $fingerprint_no]);
+
+                }
+
             public function savetodatabase(Request $request)
             {
                 $query1 = $request->input('query1');
@@ -74,9 +83,22 @@ class PatientController extends Controller
                     ->update(['fingerprint_no' => $query2]);
 
                 return response()->json($query1+$query2);
+            }
 
+            public function RegisterNewFingerprint(Request $request)
+            {
+                $query1 = $request->input('query1');
+                $query2 = $request->input('query2');
+
+                $patient_id = DB::table('patients')
+                            ->where('fingerprint_no', $query2)
+                            ->where('status', 'null')
+                            ->get('id');
+
+                return response()->json(['patient_id' => $patient_id, 'fingerprint_no' => $query2, 'code' => 200 ]);
 
             }
+
     /**
      * Display a listing of the resource.
      *
