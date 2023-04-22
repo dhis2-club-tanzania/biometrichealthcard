@@ -4,7 +4,10 @@
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
-
+        <!-- Email Address -->
+        <div class="py-4 flex items-center justify-center text-gray-20">
+            <x-input-label for="email" :value="__('NHIF BIOMETRIC AUTHENTICATION SYSTEM')" />
+        </div>
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />

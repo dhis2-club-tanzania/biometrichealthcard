@@ -19,7 +19,7 @@ class PatientFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'status' => 'null',
+            'status' => false,
             'fingerprint_no' => null ,
         ];
     }

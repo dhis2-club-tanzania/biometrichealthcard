@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('patients', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
+        Schema::create('fingerprints', function (Blueprint $table) {
+            $table->id();
+            $table->foreign('member_id')->references('id')->on('nhif_members');
             $table->integer('fingerprint_no')->nullable();
-            $table->boolean('status')->default(false);
+            $table->string('fingerprint_status')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('patients');
+        Schema::dropIfExists('fingerprints');
     }
 };

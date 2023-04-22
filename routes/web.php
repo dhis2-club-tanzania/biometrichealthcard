@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\FingerprintController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ClientController;
+use App\Http\Controllers\NhifMemberController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProfileController;
 
@@ -35,13 +36,22 @@ Route::get('/generateid', function () {
     return view('client');
 });
 
-Route::resource('clients', ClientController::class)
-    ->middleware(['auth', 'verified']);
-
 Route::resource('patients', PatientController::class)
 ->middleware(['auth', 'verified']);
 
+Route::resource('nhifmembers', NhifMemberController::class)
+->middleware(['auth', 'verified']);
+
+Route::get('/nhifMember/{nhifMember}/details/create', [FingerprintController::class, 'create'])->name('nhifMember.details.create');
+
+
+Route::resource('fingerprints', FingerprintController::class)
+->only(['index', 'store'])
+->middleware(['auth', 'verified']);
+
 Route::post('/search', [PatientController::class, 'search'])->name('search');
+
+Route::get('/searchget/{str}', [PatientController::class, 'searchget'])->name('searchget');
 
 Route::post('/saving', [PatientController::class, 'savetodatabase'])->name('savetodatabase');
 

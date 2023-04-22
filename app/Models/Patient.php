@@ -14,4 +14,14 @@ class Patient extends Model
         'fingerprint_no',
         'status',
     ];
+
+    public function getStatusAttribute($value)
+    {
+        return $value ? 'true' : 'false';
+    }
+
+    public function setStatusAttribute($value)
+    {
+        $this->attributes['status'] = $value === 'true' || $value === true;
+    }
 }

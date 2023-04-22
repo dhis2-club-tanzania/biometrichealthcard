@@ -5,14 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Client extends Model
+class Verification extends Model
 {
     use HasFactory;
-
-    protected $fillable = [
-        'fingerprint_no',
-        'patient_id',
-        'status',
-        'cardNo',
-    ];
 }

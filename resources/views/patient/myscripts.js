@@ -24,6 +24,6 @@ function showResult(str) {
         document.getElementById("livesearch").style.border="1px solid #A5ACB2";
       }
     }
-    xmlhttp.open("GET", "/search_clients/?q="+str, true);
+    xmlhttp.open("GET", "/searchget/?q="+str, true);
     xmlhttp.send();
   }

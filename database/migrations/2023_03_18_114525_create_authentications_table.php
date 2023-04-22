@@ -13,11 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('patients', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->integer('fingerprint_no')->nullable();
-            $table->boolean('status')->default(false);
+        Schema::create('authentications', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('patients');
+        Schema::dropIfExists('authentications');
     }
 };
