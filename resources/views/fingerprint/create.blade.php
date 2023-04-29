@@ -1,4 +1,5 @@
 <x-app-layout>
+    <div class="py-6">
     <x-create-card>
         <x-slot name="title">
            NHIF Members Registration
@@ -32,9 +33,11 @@
                 <x-primary-button type="submit" class="btn btn-success" onclick="generateRandomNumber()">
                     Generate ID
                 </x-primary-button>
-                <x-primary-button class="p-2 bg-green-600 w-30">
-                    {{ __('Register') }}
-                </x-primary-button>
+                <a href="{{ url('/api/registerfingerprint') }}">
+                    <x-primary-button class="p-2 bg-green-600 w-30">
+                        {{ __('Register') }}
+                    </x-primary-button>
+                </a>
                 <x-primary-button class="p-2 mx-20 bg-red-600 w-30" onclick="history.back()">
                     CLOSE
                 </x-primary-button>

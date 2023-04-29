@@ -46,7 +46,7 @@ Route::get('/nhifMember/{nhifMember}/details/create', [FingerprintController::cl
 
 
 Route::resource('fingerprints', FingerprintController::class)
-->only(['index', 'store'])
+->only(['index', 'store', 'destroy'])
 ->middleware(['auth', 'verified']);
 
 Route::post('/search', [PatientController::class, 'search'])->name('search');

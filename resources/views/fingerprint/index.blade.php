@@ -2,9 +2,7 @@
     <div class="bg-gray-100 p-8 rounded-md w-full">
     @if(session('message'))
         <div class='alert alert-success alert-block'>
-            <button type="button" class="close" data-dismiss="alert">
                 <strong>{{ session('message') }}</strong>
-            </button>
         </div>
     @endif
     <div class=" flex items-center justify-between pb-6">
@@ -62,31 +60,31 @@
                         @foreach ($fingerprints as $fingerprint)
 						<tbody>
 							<tr>
-                                <td class="px-5 py-5 border-b border-gray-200 bg-white">
+                                <td class="px-5 py-3 border-b border-gray-200 bg-white">
                                     <div class="flex items-center">
                                         <input id="checkbox-table-1" type="checkbox" class="w-4 h-4 text-gray-900 bg-white rounded border-gray-900 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="checkbox-table-1" class="sr-only">checkbox</label>
                                     </div>
                                 </td>
-								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+								<td class="px-5 py-3 border-b border-gray-200 bg-white text-sm">
                                     <p class="text-gray-900 whitespace-no-wrap">
                                         {{$fingerprint->id}}
                                     </p>
 								</td>
-								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+								<td class="px-5 py-3 border-b border-gray-200 bg-white text-sm">
 									<p class="text-gray-900 whitespace-no-wrap">{{$fingerprint->member_id}}</p>
 								</td>
-								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+								<td class="px-5 py-3 border-b border-gray-200 bg-white text-sm">
 									<p class="text-gray-900 whitespace-no-wrap">
 										{{$fingerprint->fingerprint_no}}
 									</p>
 								</td>
-                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                <td class="px-5 py-3 border-b border-gray-200 bg-white text-sm">
                                     <p class="text-gray-900 whitespace-no-wrap">
 										{{$fingerprint->fingerprint_status}}
 									</p>
 								</td>
-								<td class="flex px-5 py-5 border-b border-gray-200 bg-white text-sm">
+								<td class="flex px-5 py-3 border-b border-gray-200 bg-white text-sm">
                                     <form method="POST" action="{{ route('fingerprints.destroy',$fingerprint->id) }}">
                                         @csrf
                                         @method('DELETE')

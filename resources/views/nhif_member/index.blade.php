@@ -2,9 +2,7 @@
     <div class="bg-gray-100 p-8 rounded-md w-full">
     @if(session('message'))
         <div class='alert alert-success alert-block'>
-            <button type="button" class="close" data-dismiss="alert">
                 <strong>{{ session('message') }}</strong>
-            </button>
         </div>
     @endif
 	<div class=" flex items-center justify-between pb-6">
@@ -71,33 +69,33 @@
 						<tbody>
 							<tr>
                                 @forelse ($nhifmembers as $nhifmember)
-                                <td class="px-5 py-5 border-b border-gray-200 bg-white">
+                                <td class="px-5 py-3 border-b border-gray-200 bg-white">
                                     <div class="flex items-center">
                                         <input id="checkbox-table-1" type="checkbox" class="w-4 h-4 text-gray-900 bg-white rounded border-gray-900 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="checkbox-table-1" class="sr-only">checkbox</label>
                                     </div>
                                 </td>
-								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+								<td class="px-5 py-3 border-b border-gray-200 bg-white text-sm">
                                     <p class="text-gray-900 whitespace-no-wrap">
                                         {{$nhifmember->id}}
                                     </p>
 								</td>
-								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+								<td class="px-5 py-3 border-b border-gray-200 bg-white text-sm">
 									<p class="text-gray-900 whitespace-no-wrap">{{$nhifmember->FirstName}} {{$nhifmember->MiddleName}} {{$nhifmember->Surname}}</p>
 								</td>
-								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+								<td class="px-5 py-3 border-b border-gray-200 bg-white text-sm">
 									<p class="text-gray-900 whitespace-no-wrap">
 										{{$nhifmember->CardNo}}
 									</p>
 								</td>
-                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    @if($nhifmember->FingerprintStatus == "true")
-                                        <strong style="color:green">TRUE</strong>
+                                <td class="px-5 py-3 border-b border-gray-200 bg-white text-sm">
+                                    @if($nhifmember->FingerprintStatus == "TRUE")
+                                        <strong style="color:blue">TRUE</strong>
                                     @else
                                         <strong style="color:red">FALSE</strong>
                                     @endif
 								</td>
-								<td class="flex px-5 py-5 border-b border-gray-200 bg-white text-sm">
+								<td class="flex px-5 py-3 border-b border-gray-200 bg-white text-sm">
                                     <a href="{{ route('nhifmembers.show',$nhifmember->id) }}">
                                         <span class="relative inline-block px-2 py-1 font-semibold text-green-600 leading-tight">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">

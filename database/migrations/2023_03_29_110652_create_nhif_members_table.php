@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('nhif_members', function (Blueprint $table) {
-            $table->increments('id');;
+            $table->id();;
             $table->string('FirstName');
             $table->string('Surname');
             $table->string('MobileNo');

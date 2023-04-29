@@ -29,7 +29,7 @@ class PatientController extends Controller
     public function generateFingerprintId()
     {
         //get all used fingerprint ids (already in the database)
-        $usedIds = DB::table('patients')->pluck('fingerprint_no')->toArray();
+        $usedIds = DB::table('fingerprints')->pluck('fingerprint_no')->toArray();
 
         //look for unused ids between 1 and 127
         $availableIds = array_diff(range(1, 127), $usedIds);

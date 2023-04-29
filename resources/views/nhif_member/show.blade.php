@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="bg-gray-100 p-8 rounded-md w-full">
+    <div class="bg-gray-100 p-4 rounded-md w-full">
         @if(session('message'))
             <div class='alert alert-success alert-block'>
                 <button type="button" class="close" data-dismiss="alert">
@@ -31,21 +31,21 @@
             </div>
             <div class="flex items-center justify-center">
                 <p class="text-sm font-semibold text-gray-700 mr-3">Fingerprint Status :</p>
-                <p class="text-gray-700">{{$nhifMember->fingerprint_status}}</p>
+                <p class="text-gray-700">{{$nhifMember->FingerprintStatus}}</p>
             </div>
             @if($nhifMember->FingerprintStatus == "TRUE")
                 <div class="flex items-center justify-center">
                     <p class="text-sm font-semibold text-gray-700 mr-3">Fingerprint Number :</p>
-                    {{-- <p class="text-gray-700">{{$nhifMember->fingerprint_status}}</p> --}}
+                    <p class="text-gray-700">{{ $fingerprint->fingerprint_no }}</p>
                 </div>
             @endif
             <div class="flex-container items-center justify-center mt-7">
                 @if ($nhifMember->FingerprintStatus == "FALSE")
-                <a href="{{ route('nhifMember.details.create', ['nhifMember' => $nhifMember]) }}">
-                    <button type="button" class="mr-20 inline-flex items-center px-4 py-2 bg-green-700 border border-transparent rounded-md font-bold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                        Register Fingerprint
-                    </button>
-                </a>
+                    <a href="{{ route('nhifMember.details.create', ['nhifMember' => $nhifMember]) }}">
+                        <button type="button" class="mr-20 inline-flex items-center px-4 py-2 bg-green-700 border border-transparent rounded-md font-bold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                            Register Fingerprint
+                        </button>
+                    </a>
                 @endif
 
                 <x-primary-button class="bg-red-700 font-bold" onclick="history.back()">

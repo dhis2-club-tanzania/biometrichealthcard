@@ -42,7 +42,7 @@ class NhifMember extends Model
     }
 
     /**
-     * Get the fingerprint associated with the user.
+     * Get the fingerprint associated with the member.
      */
     public function fingerprint(): HasOne
     {

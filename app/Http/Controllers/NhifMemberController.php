@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\NhifMember;
+use App\Models\Fingerprint;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class NhifMemberController extends Controller
 {
@@ -79,9 +81,10 @@ class NhifMemberController extends Controller
      * @param  \App\Models\NhifMember  $nhifmember
      * @return \Illuminate\Http\Response
      */
-    public function show(NhifMember $nhifmember)
+    public function show(NhifMember $nhifmember, Fingerprint $fingerprint)
     {
-        return view('nhif_member.show',['nhifMember' => $nhifmember] );
+        Log::info($nhifmember);
+        return view('nhif_member.show',['nhifMember' => $nhifmember,'fingerprint' => $fingerprint] );
     }
 
     /**

@@ -19,7 +19,7 @@ class Fingerprint extends Model
     /**
      * Get the nhif member that owns the phone.
      */
-    public function user(): BelongsTo
+    public function nhifmember(): BelongsTo
     {
         return $this->belongsTo(NhifMember::class);
     }
