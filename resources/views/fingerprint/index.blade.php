@@ -72,7 +72,7 @@
                                     </p>
 								</td>
 								<td class="px-5 py-3 border-b border-gray-200 bg-white text-sm">
-									<p class="text-gray-900 whitespace-no-wrap">{{$fingerprint->member_id}}</p>
+									<p class="text-gray-900 whitespace-no-wrap">{{$fingerprint->nhif_member_id}}</p>
 								</td>
 								<td class="px-5 py-3 border-b border-gray-200 bg-white text-sm">
 									<p class="text-gray-900 whitespace-no-wrap">

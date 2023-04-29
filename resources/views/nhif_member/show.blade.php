@@ -36,11 +36,11 @@
             @if($nhifMember->FingerprintStatus == "TRUE")
                 <div class="flex items-center justify-center">
                     <p class="text-sm font-semibold text-gray-700 mr-3">Fingerprint Number :</p>
-                    <p class="text-gray-700">{{ $fingerprint->fingerprint_no }}</p>
+                    <p class="text-gray-700">{{ $nhifMember->fingerprint->fingerprint_no }}</p>
                 </div>
             @endif
             <div class="flex-container items-center justify-center mt-7">
-                @if ($nhifMember->FingerprintStatus == "FALSE")
+                @if (!$nhifMember->fingerprint)
                     <a href="{{ route('nhifMember.details.create', ['nhifMember' => $nhifMember]) }}">
                         <button type="button" class="mr-20 inline-flex items-center px-4 py-2 bg-green-700 border border-transparent rounded-md font-bold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                             Register Fingerprint

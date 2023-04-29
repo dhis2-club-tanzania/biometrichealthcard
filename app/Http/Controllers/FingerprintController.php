@@ -43,7 +43,7 @@ class FingerprintController extends Controller
     {
         //receiving and validating the member id and fingerprint no
         $validated = $request->validate([
-            'member_id' => ['required', 'integer', 'max:255'],
+            'nhif_member_id' => ['required', 'integer', 'max:255'],
             'fingerprint_no' => ['required', 'integer', 'max:255'],
         ]);
 
@@ -87,7 +87,7 @@ class FingerprintController extends Controller
         // Get the valid data sent by the IoT device
         $data = $validator->validated();
 
-        Fingerprint::where('member_id', $data['patient_id'])
+        Fingerprint::where('nhif_member_id', $data['patient_id'])
                 ->where('fingerprint_no' , $data['fingerprint_no'])
                 ->update([
                     'fingerprint_status' => "REGISTERED",

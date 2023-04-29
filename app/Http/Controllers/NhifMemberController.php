@@ -83,8 +83,8 @@ class NhifMemberController extends Controller
      */
     public function show(NhifMember $nhifmember, Fingerprint $fingerprint)
     {
-        Log::info($nhifmember);
-        return view('nhif_member.show',['nhifMember' => $nhifmember,'fingerprint' => $fingerprint] );
+        // Log::info($nhifmember->fingerprint->member_id);
+        return view('nhif_member.show',['nhifMember' => $nhifmember] );
     }
 
     /**

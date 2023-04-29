@@ -10,13 +10,13 @@
 
                 <!-- member_id -->
                 <div class="mt-3">
-                    <x-input-label for="member_id" :value="__('NHIF Member ID')" />
+                    <x-input-label for="nhif_member_id" :value="__('NHIF Member ID')" />
 
-                    <input type="text" name="member_id" value="{{ $nhifMember->id }}" readonly>
+                    <input type="text" name="nhif_member_id" value="{{ $nhifMember->id }}" readonly>
 
-                    {{-- <x-text-input id="member_id" class="block mt-1 w-full" type="hidden" name="member_id" :value="{{ $nhifMember->id }}" required /> --}}
+                    {{-- <x-text-input id="nhif_member_id" class="block mt-1 w-full" type="hidden" name="nhif_member_id" :value="{{ $nhifMember->id }}" required /> --}}
 
-                    <x-input-error :messages="$errors->get('member_id')" class="mt-2" />
+                    <x-input-error :messages="$errors->get('nhif_member_id')" class="mt-2" />
                 </div>
 
                 <!-- Fingerprint No. -->

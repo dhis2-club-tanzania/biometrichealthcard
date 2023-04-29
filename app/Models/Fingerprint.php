@@ -12,7 +12,7 @@ class Fingerprint extends Model
 
     protected $fillable = [
         'fingerprint_no',
-        'member_id',
+        'nhif_member_id',
         'fingerprint_status',
     ];
 

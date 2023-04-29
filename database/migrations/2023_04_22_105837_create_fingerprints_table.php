@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('fingerprints', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('member_id');
-            $table->foreign('member_id')->references('id')->on('nhif_members');
+            $table->unsignedBigInteger('nhif_member_id');
+            $table->foreign('nhif_member_id')->references('id')->on('nhif_members');
             $table->integer('fingerprint_no')->nullable();
             $table->string('fingerprint_status')->nullable();
             $table->timestamps();
