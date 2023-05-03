@@ -39,6 +39,10 @@
 									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-800 text-left text-xs font-semibold text-gray-200 uppercase tracking-wider">
 									S/N
 								</th>
+                                <th
+									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-800 text-left text-xs font-semibold text-gray-200 uppercase tracking-wider">
+									Member
+								</th>
 								<th
 									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-800 text-left text-xs font-semibold text-gray-200 uppercase tracking-wider">
 									Member ID
@@ -71,8 +75,11 @@
                                         {{$fingerprint->id}}
                                     </p>
 								</td>
+                                <td class="px-5 py-3 border-b border-gray-200 bg-white text-sm">
+									<p class="text-gray-900 whitespace-no-wrap">{{$fingerprint->nhif_member->FirstName}} {{$fingerprint->nhif_member->Surname}}</p>
+								</td>
 								<td class="px-5 py-3 border-b border-gray-200 bg-white text-sm">
-									<p class="text-gray-900 whitespace-no-wrap">{{$fingerprint->nhif_member_id}}</p>
+									<p class="text-gray-900 whitespace-no-wrap">{{$fingerprint->nhif_member->id}}</p>
 								</td>
 								<td class="px-5 py-3 border-b border-gray-200 bg-white text-sm">
 									<p class="text-gray-900 whitespace-no-wrap">

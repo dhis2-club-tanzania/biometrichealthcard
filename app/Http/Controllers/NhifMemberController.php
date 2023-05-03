@@ -81,9 +81,9 @@ class NhifMemberController extends Controller
      * @param  \App\Models\NhifMember  $nhifmember
      * @return \Illuminate\Http\Response
      */
-    public function show(NhifMember $nhifmember, Fingerprint $fingerprint)
+    public function show(NhifMember $nhifmember)
     {
-        // Log::info($nhifmember->fingerprint->member_id);
+        // Log::info($nhifmember->fingerprint->nhif_member_id);
         return view('nhif_member.show',['nhifMember' => $nhifmember] );
     }
 
@@ -121,4 +121,11 @@ class NhifMemberController extends Controller
         $nhifmember->delete();
 
         return redirect(route('nhifmembers.index'))->with('message', 'Member deleted successfully!');    }
-}
+
+    public function mobileappusers(NhifMember $nhifmember)
+    {
+        $nhifmember->delete();
+
+        return redirect(route('nhifmembers.index'))->with('message', 'Member deleted successfully!');    }
+
+    }

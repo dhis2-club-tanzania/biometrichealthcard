@@ -16,7 +16,7 @@ class AuthenticationController extends Controller
         $fingerprint_device_id = $request->input('fingerprint_device_id');
 
         // Check if patient is recognized
-        $recognized_finger_print = DB::table('patients')
+        $recognized_finger_print = DB::table('fingerprints')
                                         ->where('fingerprint_no', $fingerprint_device_id)
                                         ->get();
 
@@ -54,7 +54,7 @@ class AuthenticationController extends Controller
      */
     public function index()
     {
-        //
+        return view('authentication.index', ['authentications' => Authentication::latest()->paginate(5)]);
     }
 
     /**

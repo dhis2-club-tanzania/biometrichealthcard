@@ -10,6 +10,8 @@ class Fingerprint extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id';
+
     protected $fillable = [
         'fingerprint_no',
         'nhif_member_id',
@@ -19,7 +21,7 @@ class Fingerprint extends Model
     /**
      * Get the nhif member that owns the phone.
      */
-    public function nhifmember(): BelongsTo
+    public function nhif_member(): BelongsTo
     {
         return $this->belongsTo(NhifMember::class);
     }

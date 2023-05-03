@@ -16,8 +16,9 @@ class FingerprintController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Fingerprint $fingerprint)
     {
+        // Log::info($fingerprint->nhifmember->id);
         return view('fingerprint.index', ['fingerprints' => Fingerprint::latest()->paginate(5)]);
     }
 

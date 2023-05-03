@@ -10,8 +10,9 @@ class NhifMember extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id';
+
     protected $fillable = [
-        'id',
         // 'FormFourIndexNo',
         'FirstName',
         // 'MiddleName',
