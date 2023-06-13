@@ -20,18 +20,9 @@ return new class extends Migration
             $table->string('MobileNo');
             $table->string('Gender');
             $table->string('CardNo');
+            $table->string('card_status');
             $table->string('image')->nullable();
             $table->boolean('FingerprintStatus')->default(false);
-            // $table->string('FormFourIndexNo');
-            // $table->string('MiddleName');
-            // $table->string('AdmissionNo');
-            // $table->string('CollageFaculty');
-            // $table->string('ProgrammeOfStudy');
-            // $table->integer('CourseDuration');
-            // $table->string('MaritalStatus');
-            // $table->date('DateJoiningEmployer');
-            // $table->date('DateOfBirth');
-            // $table->string('NationalID');
             $table->timestamps();
         });
     }

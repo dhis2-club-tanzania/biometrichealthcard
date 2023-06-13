@@ -43,15 +43,20 @@ class FingerprintController extends Controller
     public function store(Request $request)
     {
         //receiving and validating the member id and fingerprint no
-        $validated = $request->validate([
-            'nhif_member_id' => ['required', 'integer', 'max:255'],
-            'fingerprint_no' => ['required', 'integer', 'max:255'],
+        $validator = Validator::make($request->all(), [
+            'nhif_member_id' => 'required|integer|max:255',
+            'fingerprint_no' => 'required|integer|max:255',
         ]);
 
-        $validated['fingerprint_status'] = "UNREGISTERED";
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+        }
+
+        $data = $validator->validated();
+        $data['fingerprint_status'] = "UNREGISTERED";
 
         //saving to database
-        Fingerprint::create($validated);
+        Fingerprint::create($data);
 
         return redirect(route('fingerprints.index'))->with('message', 'fingerprint created successfully!');
 
@@ -66,7 +71,9 @@ class FingerprintController extends Controller
                     ->get();
         $fingerprint = $data[0];
 
-        return response()->json(['patient_id' => $fingerprint->member_id, 'fingerprint_no' => $fingerprint->fingerprint_no, 'code' => 200 ]);
+        return response()->json(['patient_id' => $fingerprint->nhif_member_id, 'fingerprint_no' => $fingerprint->fingerprint_no, 'code' => 200 ]);
+
+        return redirect(route('fingerprints.index'))->with('message', 'fingerprint sent to the device successfully!');
 
     }
 
@@ -82,12 +89,13 @@ class FingerprintController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response('VALIDATION_ERROR', $validator->errors());
+            return response()->json(['code'=> 204, 'VALIDATION_ERROR'=>$validator->errors()]);
         }
 
         // Get the valid data sent by the IoT device
         $data = $validator->validated();
 
+        //update status to registered
         Fingerprint::where('nhif_member_id', $data['patient_id'])
                 ->where('fingerprint_no' , $data['fingerprint_no'])
                 ->update([
@@ -99,15 +107,17 @@ class FingerprintController extends Controller
                     'FingerprintStatus' => true,
                 ]);
 
-
-        // Patient::where('id',$request->input('patient_id'))
-        //             ->where('fingerprint_no' , $request->input('fingerprint_no'))
-        //             ->update([
-        //                 'status' => 'TRUE',
-        //             ]);
-
-        // Return a success response
         return response()->json(['code' => 200, 'message'=>'Request sent successfully']);
+    }
+
+    public function report(){
+        // Get the number of new fingerprints registered each week
+        $fingerprintsByWeek = Fingerprint::selectRaw('YEARWEEK(created_at) as week, COUNT(*) as count')
+                                        ->groupBy('week')
+                                        ->orderBy('week', 'ASC')
+                                        ->get();
+
+        return view('fingerprint.report', ['fingerprintsByWeek' => $fingerprintsByWeek ]);
     }
 
     /**

@@ -27,10 +27,15 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('authentications.index')" :active="request()->routeIs('authentications.index')">
+                        {{ __('Authentications') }}
+                    </x-nav-link>
+                </div>
+                {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('patients.index')" :active="request()->routeIs('patients.index')">
                         {{ __('Patients') }}
                     </x-nav-link>
-                </div>
+                </div> --}}
             </div>
 
             <!-- Settings Dropdown -->

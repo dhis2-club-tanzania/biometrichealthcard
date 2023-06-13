@@ -20,6 +20,11 @@
 				</svg>
 				<input class="bg-white outline-none ml-1 block " type="text" name="" id="" placeholder="search...">
           </div>
+          <div class="lg:ml-40 ml-10 space-x-8">
+            <a href="{{ route('fingerprint.report')}} ">
+                <button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Report</button>
+            </a>
+          </div>
 
 		</div>
 		</div>

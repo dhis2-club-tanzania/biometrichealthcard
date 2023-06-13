@@ -20,7 +20,7 @@
               <!-- small box -->
               <div class="small-box bg-info">
                 <div class="inner">
-                  <h3>150</h3>
+                  <h3>{{ $member }}</h3>
 
                   <p>Total Members</p>
                 </div>
@@ -35,7 +35,7 @@
               <!-- small box -->
               <div class="small-box bg-success">
                 <div class="inner">
-                  <h3>73</h3>
+                  <h3>{{ $fingerprint }}</h3>
 
                   <p>Fingerprints</p>
                 </div>
@@ -50,7 +50,7 @@
               <!-- small box -->
               <div class="small-box bg-warning">
                 <div class="inner">
-                  <h3>50<sup style="font-size: 20px">%</sup></h3>
+                  <h3>{{$percentage}}<sup style="font-size: 20px">%</sup></h3>
 
                   <p>Weekly Registrations</p>
                 </div>
@@ -83,7 +83,7 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h5 class="card-title">Monthly Recap Report</h5>
+                <h5 class="card-title">Weekly Recap Report</h5>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -111,16 +111,15 @@
                 <div class="row">
                   <div class="col-md-8">
                     <p class="text-center">
-                      <strong> 1 Jan, 2023 - 30 Jul, 2023</strong>
-                      <img src="dist/img/graph1.png" alt="User Image">
+                      {{-- <img src="dist/img/graph1.png" alt="User Image"> --}}
+                      <canvas id="chart" style="position: relative; height:50vh; width:70vw"></canvas>
                     </p>
-{{--
-                    <div class="chart">
+
+                    {{-- <div class="chart">
                       <!-- Sales Chart Canvas -->
                       <canvas id="salesChart" height="180" style="height: 180px;" class="chartjs-render-monitor"></canvas>
 
-                    </div>
-                    <!-- /.chart-responsive --> --}}
+                    </div> --}}
                   </div>
                   <!-- /.col -->
                   <div class="col-md-4">
@@ -137,30 +136,29 @@
                       </div>
                       <!-- /.progress-group -->
 
-                    <div class="progress-group">
-                      New Members
-                      <span class="float-right"><b>150</b>/200</span>
-                      <div class="progress progress-sm">
-                        <div class="progress-bar bg-primary" style="width: 75%"></div>
+                      <div class="progress-group">
+                        <span class="progress-text">Fingerprints</span>
+                        <span class="float-right"><b>90</b>/100</span>
+                        <div class="progress progress-sm">
+                          <div class="progress-bar bg-success" style="width: 90%"></div>
+                        </div>
                       </div>
-                    </div>
-                    <!-- /.progress-group -->
+                      <!-- /.progress-group -->
 
                     <div class="progress-group">
                       Registration of fingerprints
-                      <span class="float-right"><b>100</b>/200</span>
+                      <span class="float-right"><b>45.45</b>/100</span>
                       <div class="progress progress-sm">
-                        <div class="progress-bar bg-warning" style="width: 50%"></div>
+                        <div class="progress-bar bg-warning" style="width: 45.45%"></div>
                       </div>
                     </div>
                     <!-- /.progress-group -->
 
-
                     <div class="progress-group">
-                        <span class="progress-text">Fingerprints</span>
-                        <span class="float-right"><b>73</b>/200</span>
+                        Members
+                        <span class="float-right"><b>22</b>/100</span>
                         <div class="progress progress-sm">
-                          <div class="progress-bar bg-success" style="width: 37%"></div>
+                          <div class="progress-bar bg-primary" style="width: 22%"></div>
                         </div>
                       </div>
                       <!-- /.progress-group -->
@@ -226,10 +224,23 @@
         </div>
     </div>
 
+     {{-- graph --}}
+     <script>
+        var data = <?php echo json_encode($data); ?>;
+
+        var ctx = document.getElementById('chart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+        });
+    </script>
+
     <!-- Core -->
     <script src="../assets/js/core/popper.min.js"></script>
     <script src="../assets/js/core/bootstrap.min.js"></script>
 
     <!-- Theme JS -->
     <script src="../assets/js/argon-dashboard.min.js"></script>
+
+
 </x-app-layout>

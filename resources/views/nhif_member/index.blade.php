@@ -23,7 +23,7 @@
                 </form>
             </div>
 				<div class="lg:ml-40 ml-10 space-x-8">
-                    <a href="">
+                    <a href="{{ route('nhifMember.report')}} ">
 					    <button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Report</button>
                     </a>
                     <a href="nhifmembers/create">
@@ -58,6 +58,10 @@
 								</th>
                                 <th
 									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-800 text-left text-xs font-semibold text-gray-200 uppercase tracking-wider">
+									Card Status
+								</th>
+                                <th
+									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-800 text-left text-xs font-semibold text-gray-200 uppercase tracking-wider">
 									Fingerprint Status
 								</th>
                                 <th
@@ -86,6 +90,11 @@
 								<td class="px-5 py-3 border-b border-gray-200 bg-white text-sm">
 									<p class="text-gray-900 whitespace-no-wrap">
 										{{$nhifmember->CardNo}}
+									</p>
+								</td>
+                                <td class="px-5 py-3 border-b border-gray-200 bg-white text-sm">
+									<p class="text-sm font-semibold text-gray-900 uppercase whitespace-no-wrap">
+										{{$nhifmember->card_status}}
 									</p>
 								</td>
                                 <td class="px-5 py-3 border-b border-gray-200 bg-white text-sm">

@@ -3,8 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
-use App\Http\Controllers\FingerprintController;
+use App\Http\Controllers\MobileController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\NhifMemberController;
+use App\Http\Controllers\FingerprintController;
+use App\Http\Controllers\AuthenticationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,5 +28,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Route::post('/savefingerprint', [PatientController::class, 'savefingerprint']);
 
 Route::post('/registerfingerprint', [FingerprintController::class, 'RegisterFingerprintPattern']);
+
 Route::post('/savefingerprint', [FingerprintController::class, 'savefingerprint']);
+
+Route::post('/authenticatemember', [AuthenticationController::class, 'ManageAuthentication']);
+
+Route::post('/startvisit', [AuthenticationController::class, 'startvisit' ]);
+
+//mobile app APIs
+Route::post('/login', [MobileController::class, 'login']);
 

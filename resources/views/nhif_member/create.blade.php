@@ -47,16 +47,32 @@
                 <div class="mt-3">
                     <x-input-label for="MobileNo" :value="__('Mobile No')" />
 
-                    <x-text-input id="MobileNo" class="block mt-1 w-full" type="text" name="MobileNo" :value="old('MobileNo')" required />
+                    <x-text-input id="MobileNo" class="block mt-1 w-full" type="text" name="MobileNo" placeholder="0*********" :value="old('MobileNo')" required />
 
                     <x-input-error :messages="$errors->get('MobileNo')" class="mt-2" />
+                </div>
+
+                <!-- card_status -->
+                <div class="mt-3">
+                    <x-input-label for="card_status" :value="__('card_status')" />
+
+                    <select name="card_status" id="card_status" required>
+                        <option value="active" {{ old('card_status') == 'active' ? 'selected' : '' }}>active</option>
+                        <option value="not active" {{ old('card_status') == 'not active' ? 'selected' : '' }}>not active</option>
+                    </select>
+
+                    <x-input-error :messages="$errors->get('card_status')" class="mt-2" />
                 </div>
 
                 <!-- Gender -->
                 <div class="mt-3">
                     <x-input-label for="Gender" :value="__('Gender')" />
 
-                    <x-text-input id="Gender" class="block mt-1 w-full" type="text" name="Gender" :value="old('Gender')" required />
+                    <select name="Gender" id="Gender" required>
+                        <option value="male" {{ old('Gender') == 'male' ? 'selected' : '' }}>Male</option>
+                        <option value="female" {{ old('Gender') == 'female' ? 'selected' : '' }}>Female</option>
+                        <option value="other" {{ old('Gender') == 'other' ? 'selected' : '' }}>Other</option>
+                    </select>
 
                     <x-input-error :messages="$errors->get('Gender')" class="mt-2" />
                 </div>

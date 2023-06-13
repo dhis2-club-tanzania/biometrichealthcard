@@ -26,7 +26,8 @@ class NhifMemberFactory extends Factory
             'MobileNo' => fake()->phoneNumber() ,
             'Gender' => $gender ,
             'FingerprintStatus' => false,
-            'image' => fake()->image('storage\app\public\images',400,300, null, false) ,
+            'card_status' => fake()->randomElement(['active', 'not active']),
+            'image' => Storage::url('images\nono.jpg'),
         ];
     }
 }

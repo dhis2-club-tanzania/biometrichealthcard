@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('authentications', function (Blueprint $table) {
             $table->id();
             $table->string('authentication_fingerprint_user');
+            $table->string('authentication_fingerprint_no');
             $table->boolean('authentication_status');
             $table->timestamps();
         });
