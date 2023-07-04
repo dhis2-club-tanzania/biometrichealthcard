@@ -16,22 +16,18 @@
                     <x-input-error :messages="$errors->get('patient')" class="mt-2" />
                 </div>
 
-                <form>
-                    <select name="visitType">
-                        @foreach ($visitTypes as $visitType)
-                            <option value="{{ $visitType['uuid'] }}">{{ $visitType['display'] }}</option>
-                        @endforeach
-                    </select>
-                    <button type="submit">Submit</button>
-                </form>
-
                 <!-- visitType -->
                <div class="mt-3">
-                    <x-input-label for="visitType" :value="__('visitType')" />
+                
+                <x-input-label for="visitType" :value="__('visitType')" />
 
-                    <x-text-input id="visitType" class="block mt-1 w-full" type="text" name="visitType" :value="old('visitType')" required />
+                <select name="visitType">
+                    @foreach ($visitTypes['results'] as $visitType)
+                        <option value="{{ $visitType['uuid'] }}">{{ $visitType['display'] }}</option>
+                    @endforeach
+                </select>
 
-                    <x-input-error :messages="$errors->get('visitType')" class="mt-2" />
+                <x-input-error :messages="$errors->get('visitType')" class="mt-2" />
                 </div>
 
                 <!-- CardNo -->

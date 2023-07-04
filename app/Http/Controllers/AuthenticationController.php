@@ -105,7 +105,6 @@ class AuthenticationController extends Controller
             if ($response->getStatusCode() === 200) {
                 $visitTypes = json_decode($response->getBody(), true);
 
-                return $visitTypes;
             }
 
 
