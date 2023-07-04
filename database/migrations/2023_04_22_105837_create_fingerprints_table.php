@@ -14,9 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('fingerprints', function (Blueprint $table) {
-            $table->id();
+            $table->integer('fingerprint_no')->primary();
             $table->unsignedBigInteger('nhif_member_id');
-            $table->integer('fingerprint_no')->nullable();
             $table->string('fingerprint_status')->nullable();
             $table->timestamps();
 

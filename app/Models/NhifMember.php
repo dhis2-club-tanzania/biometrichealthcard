@@ -33,6 +33,7 @@ class NhifMember extends Model
         'CardNo',
         'FingerprintStatus',
         'image',
+        'card_status',
     ];
 
     public function getFingerprintStatusAttribute($value)

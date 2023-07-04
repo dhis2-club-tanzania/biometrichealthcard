@@ -5,6 +5,11 @@
                 <strong>{{ session('message') }}</strong>
         </div>
     @endif
+    @if (session('error'))
+        <div class="alert alert-danger alert-block">
+            <strong>{{ session('error') }}</strong>
+        </div>
+    @endif
 	<div class=" flex items-center justify-between pb-6">
 		<div>
 			<h2 class="text-gray-600 font-semibold text-l">NHIF MEMBERS</h2>

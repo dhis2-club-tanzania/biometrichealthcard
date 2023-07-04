@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
+use GuzzleHttp\Client;
 use App\Models\Patient;
 use App\Models\NhifMember;
 use App\Models\Fingerprint;
 use Illuminate\Http\Request;
 use App\Models\Authentication;
-use GuzzleHttp\Client;
 use GuzzleHttp\Promise\Create;
+use GuzzleHttp\RequestOptions;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Http;
 
 class AuthenticationController extends Controller
 {
@@ -26,7 +29,7 @@ class AuthenticationController extends Controller
         if($recognized_finger_print){
             // check if user is already marked IN and wants to be IN again
             if ($request_flag == "IN"){
-                if (Authentication::where('authentication_fingerprint_no', $recognized_finger_print->fingerprint_no)
+                if (Authentication::where('fingerprint_id', $recognized_finger_print->fingerprint_no)
                                     ->where('authentication_status', true)
                                     ->exists())
                 {
@@ -36,9 +39,10 @@ class AuthenticationController extends Controller
                 else{
                     $nhifdata = NhifMember::find($recognized_finger_print->nhif_member_id);
 
+                    Log::info($recognized_finger_print->fingerprint_no);
                     $new_attendance = new Authentication();
                     $new_attendance->authentication_fingerprint_user = $nhifdata->FirstName . ' ' . $nhifdata->Surname;
-                    $new_attendance->authentication_fingerprint_no = $recognized_finger_print->fingerprint_no;
+                    $new_attendance->fingerprint_id = $recognized_finger_print->fingerprint_no;
                     $new_attendance->authentication_status = true;
                     $new_attendance->save();
 
@@ -49,7 +53,7 @@ class AuthenticationController extends Controller
             }
 
             if ($request_flag == "OUT"){
-                Authentication::where('authentication_fingerprint_no', $recognized_finger_print->fingerprint_no)
+                Authentication::where('fingerprint_id', $recognized_finger_print->fingerprint_no)
                                     ->where('authentication_status', true)
                                     ->delete();
 
@@ -79,9 +83,42 @@ class AuthenticationController extends Controller
     }
 
     //start visit in icare
-    public function startvisitpage()
+    public function startvisitpage($authenticated_id)
     {
-        return view('authentication.startvisit');
+         // Retrieve the authenticated member records from the nhifmember table
+         $authenticated = Authentication::findOrFail($authenticated_id);
+         Log::info($authenticated_id);
+
+        $authenticatedmember = $authenticated->fingerprint->nhif_member;
+
+        Log::info($authenticatedmember);
+
+        //fetchvisittypes
+        $client = new Client([
+            RequestOptions::VERIFY => false,
+        ]);
+        $response = $client->get('https://icare-student.dhis2.udsm.ac.tz/openmrs/ws/rest/v1/visittype', [
+            'auth' => [
+                'admin', 'Admin123'
+            ]
+            ]);
+            if ($response->getStatusCode() === 200) {
+                $visitTypes = json_decode($response->getBody(), true);
+
+                return $visitTypes;
+            }
+
+
+        // check  active status
+        if ($authenticatedmember->card_status === 'active') {
+            return view('authentication.startvisit', compact('visitTypes'));
+        }
+        else if($authenticatedmember->card_status === 'not active') {
+            return back()->with('error', 'NHIF member card is not active');
+        }
+        else{
+            return back()->with('error', 'NHIF member does not exist');
+        }
     }
 
     /**

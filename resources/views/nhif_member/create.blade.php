@@ -47,7 +47,7 @@
                 <div class="mt-3">
                     <x-input-label for="MobileNo" :value="__('Mobile No')" />
 
-                    <x-text-input id="MobileNo" class="block mt-1 w-full" type="text" name="MobileNo" placeholder="0*********" :value="old('MobileNo')" required />
+                    <x-text-input id="MobileNo" class="block mt-1 w-full" type="text" name="MobileNo" placeholder="255*********" :value="old('MobileNo')" required />
 
                     <x-input-error :messages="$errors->get('MobileNo')" class="mt-2" />
                 </div>
@@ -173,7 +173,7 @@
                     {{ __('Register') }}
                 </x-primary-button>
                 <x-primary-button class="p-2 mx-20 bg-red-600 w-30" onclick="history.back()">
-                    CLOSE
+                    BACK
                 </x-primary-button>
             </div>
         </form>

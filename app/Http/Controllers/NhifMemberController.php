@@ -53,7 +53,7 @@ class NhifMemberController extends Controller
         $validator = Validator::make($request->all(), [
             'FirstName' => 'required|string|max:255',
             'Surname' => 'required|string|max:255',
-            'MobileNo' => 'required|string|max:10|regex:/^0\d{9}$/|unique:nhif_members,MobileNo',
+            'MobileNo' => 'required|string|max:12|regex:/^255\d{9}$/|unique:nhif_members,MobileNo',
             'Gender' => 'required|string|max:255',
             'CardNo' => 'required|string|max:12|unique:nhif_members,CardNo',
             'card_status' => 'required|string|max:255',
@@ -142,12 +142,18 @@ class NhifMemberController extends Controller
                             ->groupBy('date')
                             ->get();
 
+        $female = NhifMember::where('gender', 'female')->count();
+        $male = NhifMember::where('gender', 'male')->count();
+
         $labels = [];
         $values = [];
 
         foreach ($data as $datum) {
             $labels[] = $datum->date;
             $values[] = $datum->count;
+            $date = $datum->date;
+
+            $member = NhifMember::orderBy('Gender', 'desc')->get();
         }
 
         $dataArray = [
@@ -164,7 +170,7 @@ class NhifMemberController extends Controller
         ];
 
 
-        return view('nhif_member.report', ['dataArray' => $dataArray ]);
+        return view('nhif_member.report', ['dataArray' => $dataArray , 'datas' => $data, 'female' => $female, 'male' => $male, 'members' => $member]);
     }
 
     }

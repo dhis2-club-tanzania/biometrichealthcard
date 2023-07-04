@@ -7,13 +7,18 @@
                 </button>
             </div>
         @endif
+        @if (session('error'))
+            <div class="alert alert-danger alert-block">
+                <strong>{{ session('error') }}</strong>
+            </div>
+        @endif
         <x-slot name="title">
             Member Information
         </x-slot>
 
         <div class="w-3/4 lg:w-1/2 mx-auto rounded-md bg-white shadow-lg m-10 p-10 text-center">
             <img
-            class="w-48 lg:w-1/4 bg-blue-600 mx-auto rounded-lg mb-4 border-gray-800" alt="avatar"
+            class="w-48 lg:w-1/5 bg-blue-600 mx-auto rounded-lg mb-4 border-gray-800" alt="avatar"
             src="{{$nhifMember->image ? asset
                 ('storage/' . $nhifMember->image) : asset('/images/nono.jpg')}}"
             alt=""
@@ -33,6 +38,10 @@
                 <p class="text-sm font-semibold text-gray-700 mr-3">Fingerprint Status :</p>
                 <p class="text-gray-700">{{$nhifMember->FingerprintStatus}}</p>
             </div>
+            <div class="flex items-center justify-center">
+                <p class="text-sm font-semibold text-gray-700 mr-3">Fingerprint Status :</p>
+                <p class="text-gray-700">{{$nhifMember->card_status}}</p>
+            </div>
             @if($nhifMember->FingerprintStatus == "TRUE")
                 <div class="flex items-center justify-center">
                     <p class="text-sm font-semibold text-gray-700 mr-3">Fingerprint Number :</p>
@@ -40,7 +49,7 @@
                 </div>
             @endif
             <div class="flex-container items-center justify-center mt-7">
-                @if (!$unregisteredExists)
+                {{-- @if (!$unregisteredExists) --}}
                     @if (!$nhifMember->fingerprint )
                         <a href="{{ route('nhifMember.details.create', ['nhifMember' => $nhifMember]) }}">
                             <button type="button" class="mr-20 inline-flex items-center px-4 py-2 bg-green-700 border border-transparent rounded-md font-bold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
@@ -48,10 +57,12 @@
                             </button>
                         </a>
                     @endif
-                @endif
+                {{-- @endif --}}
 
-                <x-primary-button class="bg-red-700 font-bold" onclick="history.back()">
-                    CLOSE
-                </x-primary-button>
+                <a href="{{ route('nhifmembers.index') }}">
+                    <x-primary-button class="bg-red-700 font-bold">
+                        CLOSE
+                    </x-primary-button>
+                </a>
             </div>
 </x-app-layout>

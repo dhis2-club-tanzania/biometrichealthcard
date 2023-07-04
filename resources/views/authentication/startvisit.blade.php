@@ -7,31 +7,31 @@
         <form method="POST" action="{{ route('nhifmembers.store') }}" enctype="multipart/form-data">
             @csrf
 
-                <!-- Image -->
-                <div>
-                    <x-input-label for="image" :value="__('Image')"> Select Image </x-input-label>
-
-                    <x-text-input id="image" class="block mt-1 w-full" type="file" name="image" :value="old('image')" required />
-
-                    <x-input-error :messages="$errors->get('image')" class="mt-2" />
-                </div>
-
-                <!-- FirstName -->
+                <!-- patient -->
                 <div class="mt-3">
-                    <x-input-label for="FirstName" :value="__('First Name')" />
+                    <x-input-label for="patient" :value="__('patient')" />
 
-                    <x-text-input id="FirstName" class="block mt-1 w-full" type="text" name="FirstName" :value="old('FirstName')" required />
+                    <x-text-input id="patient" class="block mt-1 w-full" type="text" name="patient" :value="old('patient')" required />
 
-                    <x-input-error :messages="$errors->get('FirstName')" class="mt-2" />
+                    <x-input-error :messages="$errors->get('patient')" class="mt-2" />
                 </div>
 
-                <!-- Surname -->
+                <form>
+                    <select name="visitType">
+                        @foreach ($visitTypes as $visitType)
+                            <option value="{{ $visitType['uuid'] }}">{{ $visitType['display'] }}</option>
+                        @endforeach
+                    </select>
+                    <button type="submit">Submit</button>
+                </form>
+
+                <!-- visitType -->
                <div class="mt-3">
-                    <x-input-label for="Surname" :value="__('Surname')" />
+                    <x-input-label for="visitType" :value="__('visitType')" />
 
-                    <x-text-input id="Surname" class="block mt-1 w-full" type="text" name="Surname" :value="old('Surname')" required />
+                    <x-text-input id="visitType" class="block mt-1 w-full" type="text" name="visitType" :value="old('visitType')" required />
 
-                    <x-input-error :messages="$errors->get('Surname')" class="mt-2" />
+                    <x-input-error :messages="$errors->get('visitType')" class="mt-2" />
                 </div>
 
                 <!-- CardNo -->
@@ -43,16 +43,7 @@
                     <x-input-error :messages="$errors->get('CardNo')" class="mt-2" />
                 </div>
 
-                <!-- MobileNo -->
-                <div class="mt-3">
-                    <x-input-label for="MobileNo" :value="__('Mobile No')" />
-
-                    <x-text-input id="MobileNo" class="block mt-1 w-full" type="text" name="MobileNo" placeholder="0*********" :value="old('MobileNo')" required />
-
-                    <x-input-error :messages="$errors->get('MobileNo')" class="mt-2" />
-                </div>
-
-                <!-- Gender -->
+                {{-- <!-- Gender -->
                 <div class="mt-3">
                     <x-input-label for="Gender" :value="__('Gender')" />
 
@@ -63,11 +54,11 @@
                     </select>
 
                     <x-input-error :messages="$errors->get('Gender')" class="mt-2" />
-                </div>
+                </div> --}}
 
             <div class="flex-container items-center justify-center mt-4">
                 <x-primary-button class="mx-20 p-2 bg-green-600 w-30">
-                    {{ __('Register') }}
+                    {{ __('START') }}
                 </x-primary-button>
                 <x-primary-button class="p-2 mx-20 bg-red-600 w-30" onclick="history.back()">
                     CLOSE

@@ -5,6 +5,11 @@
                 <strong>{{ session('message') }}</strong>
         </div>
     @endif
+    @if (session('error'))
+        <div class="alert alert-danger alert-block">
+            <strong>{{ session('error') }}</strong>
+        </div>
+    @endif
     <div class=" flex items-center justify-between pb-6">
 		<div>
 			<h2 class="text-gray-600 font-semibold text-l">AUTHENTICATION</h2>
@@ -49,6 +54,10 @@
 									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-800 text-left text-xs font-semibold text-gray-200 uppercase tracking-wider">
 
 								</th>
+                                <th
+									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-800 text-left text-xs font-semibold text-gray-200 uppercase tracking-wider">
+
+								</th>
 							</tr>
 						</thead>
                         @foreach ($authentications as $authentication)
@@ -63,7 +72,7 @@
 									<p class="text-gray-900 whitespace-no-wrap">{{$authentication->authentication_fingerprint_user}}</p>
 								</td>
 								<td class="px-5 py-3 border-b border-gray-200 bg-white text-sm">
-									<p class="text-gray-900 whitespace-no-wrap">{{$authentication->authentication_fingerprint_no}}</p>
+									<p class="text-gray-900 whitespace-no-wrap">{{$authentication->fingerprint_id}}</p>
 								</td>
 								<td class="px-5 py-3 border-b border-gray-200 bg-white text-sm">
 									<p class="text-gray-900 whitespace-no-wrap">
@@ -71,13 +80,13 @@
 									</p>
 								</td>
                                 <td class="px-5 py-3 border-b border-gray-200 bg-white text-sm">
-									<a href="{{ route('authentication.startvisit',$authentication->id) }}">
+									<a href="{{ route('authentication',['authenticated_id' => $authentication->id ]) }}">
                                         <x-primary-button class="p-2 bg-green-600 w-30">
                                             {{ __('START VISIT') }}
                                         </x-primary-button>
                                     </a>
 								</td>
-								{{-- <td class="flex px-5 py-3 border-b border-gray-200 bg-white text-sm">
+								<td class="flex px-5 py-3 border-b border-gray-200 bg-white text-sm">
                                     <form method="POST" action="{{ route('authentications.destroy',$authentication->id) }}">
                                         @csrf
                                         @method('DELETE')
@@ -88,7 +97,7 @@
                                             </span>
                                         </a>
                                     </form>
-								</td> --}}
+								</td>
 							</tr>
 						</tbody>
                         @endforeach

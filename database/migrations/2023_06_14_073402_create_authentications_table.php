@@ -15,10 +15,12 @@ return new class extends Migration
     {
         Schema::create('authentications', function (Blueprint $table) {
             $table->id();
+            $table->integer('fingerprint_id');
             $table->string('authentication_fingerprint_user');
-            $table->string('authentication_fingerprint_no');
             $table->boolean('authentication_status');
             $table->timestamps();
+
+            $table->foreign('fingerprint_id')->references('fingerprint_no')->on('fingerprints')->onDelete('cascade');
         });
     }
 

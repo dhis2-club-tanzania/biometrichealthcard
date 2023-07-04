@@ -101,7 +101,7 @@ Route::get('/nhifMember/report', [NhifMemberController::class, 'report'])->name(
 
 Route::get('/fingerprint/report', [FingerprintController::class, 'report'])->name('fingerprint.report');
 
-Route::get('/authentication/startvisit', [AuthenticationController::class, 'startvisitpage'])->name('authentication.startvisit');
+Route::get('/authentication/{authenticated_id}', [AuthenticationController::class, 'startvisitpage'])->name('authentication');
 
 Route::resource('fingerprints', FingerprintController::class)
 ->only(['index', 'store', 'destroy'])

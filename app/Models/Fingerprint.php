@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Fingerprint extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'fingerprint_no';
 
     protected $fillable = [
         'fingerprint_no',
@@ -25,4 +26,14 @@ class Fingerprint extends Model
     {
         return $this->belongsTo(NhifMember::class);
     }
+
+    /**
+     * Return HasMany
+     * Get all authentications of a fingerprint
+     */
+    public function authentication(): HasMany
+    {
+        return $this->hasMany(Authentication::class);
+    }
+
 }
