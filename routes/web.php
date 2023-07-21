@@ -23,12 +23,21 @@ use Carbon\Carbon;
 */
 
 Route::get('/', function () {
-     $member = NhifMember::count();
+    $member = NhifMember::count();
     $fingerprint = Fingerprint::count();
 
-    // Get the start and end dates of the last week
-    $startDate = Carbon::now()->subWeek()->startOfWeek();
-    $endDate = Carbon::now()->subWeek()->endOfWeek();
+    // Get the current date
+    $today = new DateTime();
+
+    // Calculate the start date of the week (assuming Monday as the start of the week)
+    $startDate = clone $today;
+    $startDate->modify('this week');
+    $startDate->modify('Monday');
+
+    // Calculate the end date of the week (assuming Sunday as the end of the week)
+    $endDate = clone $startDate;
+    $endDate->modify('this week');
+    $endDate->modify('Sunday');
 
     // Get the count of records added in the last week
     $weeklyCount = Fingerprint::whereBetween('created_at', [$startDate, $endDate])->count();
@@ -102,6 +111,8 @@ Route::get('/nhifMember/report', [NhifMemberController::class, 'report'])->name(
 Route::get('/fingerprint/report', [FingerprintController::class, 'report'])->name('fingerprint.report');
 
 Route::get('/authentication/{authenticated_id}', [AuthenticationController::class, 'startvisitpage'])->name('authentication');
+
+Route::post('/startvisit', [AuthenticationController::class, 'handlestartvisit'])->name('startvisit');
 
 Route::resource('fingerprints', FingerprintController::class)
 ->only(['index', 'store', 'destroy'])

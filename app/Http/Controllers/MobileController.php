@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\NhifMember;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -28,6 +29,8 @@ class MobileController extends Controller
         $member = NhifMember::where('CardNo', $CardNo)
                             ->where('Surname', $Surname)
                             ->first();
+
+        Log::info($member);
 
         if ($member) {
             // Authentication succeeded
